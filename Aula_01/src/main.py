@@ -9,7 +9,7 @@ dictConfig(log_config)
 app = FastAPI(debug = True)
 logger = logging.getLogger('foo-logger')
 
-class Aluno(BaseMode1):
+class Aluno(BaseModel):
     nome: str
     matricula: str
     curso: str
@@ -18,6 +18,7 @@ class Aluno(BaseMode1):
 @app.get("/")
 async def root():
     logger.debug()
+    mensagem = f"Caminho raiz"
 
 
 
