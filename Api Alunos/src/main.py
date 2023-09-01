@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from fastapi.routing import APIRouter
 from src.aluno import Aluno
 from src.service_aluno import createStudant, getById, getAllStudants, updateStudant, deleteStudant
 
