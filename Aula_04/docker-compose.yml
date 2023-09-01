@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  banco:
+    container_name: "banco"
+    image: postgres:15.1
+    environment:
+      - POSTGRES_DB=faculdade
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=banco
+      - TZ=GMT
+    volumes:
+      - ./main/data/postgres:/var/lib/postgresql/data
+    networks:
+      faculdade:
+        ipv4_address: 191.151.0.2
+    ports:
+      - "7000:5432"
+
+networks:
+  faculdade:
+    name: faculdade
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 191.151.0.0/24
