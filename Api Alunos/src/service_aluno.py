@@ -1,8 +1,8 @@
 from src.aluno import Aluno
-from src.database import db
+from src.database import get, insert, update, getAll, delete
 
 async def getById(alunoId: int):
-    return db[alunoId]
+    return await get(alunoId)
 
 async def createStudant(aluno: Aluno):
     new_aluno = Aluno(
@@ -12,16 +12,13 @@ async def createStudant(aluno: Aluno):
         cpf= aluno.cpf,
         endereco= aluno.endereco
     )
-    new_aluno.id = len(db)
-    db.append(new_aluno)
-    return new_aluno
+    return await insert(new_aluno)
 
 async def updateStudant(aluno: Aluno):
-    db[aluno.id] = aluno
+    await update(aluno)
 
 async def getAllStudants():
-    return db
+    return await getAll()
 
 async def deleteStudant(alunoId: int):
-    dlStudant = db.pop(alunoId)
-    return dlStudant
+    return await delete(alunoId)
