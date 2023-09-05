@@ -13,10 +13,9 @@ async def getAll():
     return db
 
 async def insert(new_aluno: Aluno):
-    id = indice[0]
-    new_aluno.id = id
+    new_aluno.id = indice[0]
     db.append(new_aluno)
-    indice[0] = id + 1
+    indice[0] = indice[0] + 1
     return new_aluno
 
 async def update(upAluno: Aluno):
