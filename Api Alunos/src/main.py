@@ -7,48 +7,39 @@ app = FastAPI()
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def default():
-    with open("src/index.html", "r") as f:
+    with open("src/html/index.html", "r") as f:
         return f.read()
 
 @app.get("/alunos", tags=["Alunos"])
 async def get_all_alunos():
     alunos = await getAllStudants()
-    return {
-            "status": "SUCESS",
-            "data": alunos
-        }
+    return mensageSucess(alunos)
 
 @app.get("/alunos/{alunoId}", tags=["Alunos"])
 async def get_aluno(alunoId: int):
     aluno = await getById(alunoId)
-    return {
-            "status": "SUCESS",
-            "data": aluno
-        }
+    return mensageSucess(aluno)
 
 @app.post("/alunos", tags=["Alunos"])
 async def criar_aluno(aluno: Aluno):
     nwAluno = await createStudant(aluno)
-    return {
-            "status": "SUCESS",
-            "data": nwAluno
-        }
+    return mensageSucess(nwAluno)
 
 @app.put("/alunos", tags=["Alunos"])
 async def update_aluno(aluno: Aluno):
     upAluno = await updateStudant(aluno)
-    return {
-            "status": "SUCESS",
-            "data": upAluno
-        }
+    return mensageSucess(upAluno)
 
 @app.delete("/alunos/{alunoId}", tags=["Alunos"])
 async def delete_aluno(alunoId: int):
     try:
         dlStudant = await deleteStudant(alunoId)
-        return dlStudant
+        return mensageSucess(dlStudant)
     except Exception as e:
-        return {
-            "status": "SUCESS",
-            "data": "Erro ao deletar aluno!"
-        }
+        return mensageSucess("Erro ao deletar aluno!")
+    
+def mensageSucess(msg: str):
+    return {
+        "status": "SUCESS",
+        "data": msg
+    }
