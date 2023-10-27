@@ -1,0 +1,5 @@
+- Instalar VirtualBox Linux
+- Instalar MiniCube
+- Configurar o arquivo yaml
+- kubectl create -f *.yaml
+- Configurações do app e subir com comandos do MiniCube
